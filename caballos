@@ -1,0 +1,68 @@
+string ganador="";
+// See https://aka.ms/new-console-template for more information
+Random n= new Random();
+
+var caballo1 = new Thread(() =>
+{
+    int km=0;
+    while(km<100){
+    Thread.Sleep(1000);
+    km+=n.Next(1,15);
+    Console.WriteLine("km recorridos caballo1= "+km);
+    }
+if(ganador == ""){
+    ganador= Thread.CurrentThread.Name;
+}
+    });
+
+caballo1.Name= "caballo 1";
+var caballo2 = new Thread(() => {
+int km=0;
+while(km<100){
+    Thread.Sleep(1000);
+    km+=n.Next(1,15);
+    Console.WriteLine("Km recorridos caballo2= "+km);
+}
+if(ganador == ""){
+    ganador= Thread.CurrentThread.Name;
+}
+});
+caballo2.Name= "caballo 2";
+var caballo3 = new Thread(() => {
+int km=0;
+
+while(km<100){
+    Thread.Sleep(1000);
+    km+=n.Next(1,15);
+    Console.WriteLine("Km recorridos caballo3= "+km);
+}
+
+if(ganador == ""){
+    ganador= Thread.CurrentThread.Name;
+}
+});
+caballo3.Name= "caballo 3";
+var caballo4 = new Thread(() => {
+int km=0;
+while(km<100){
+Thread.Sleep(1000);
+km+= n.Next(1,15);
+Console.WriteLine("Km recorridos caballo4= "+km);
+}
+
+if(ganador == ""){
+    ganador= Thread.CurrentThread.Name;
+}
+});
+caballo4.Name= "caballo 4";
+
+caballo1.Start();
+caballo2.Start();
+caballo3.Start();
+caballo4.Start();
+
+caballo1.Join();
+caballo2.Join();
+caballo3.Join();
+caballo4.Join();
+ Console.WriteLine("EL GANADOR ES= "+ ganador);
